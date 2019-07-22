@@ -2,22 +2,18 @@ import integral.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Program oblicza wartość całki dla zadanej funkcji");
         final double MIN = 0;
         final double MAX  =15;
-        IntegralParam integralParam = new IntegralParam();
-        integralParam.a = MIN;
-        integralParam.b = MAX;
-        integralParam.integralMethod = IntegralMethods.RECTANGLE;
-        integralParam.numberOfThreads = 10;
-        integralParam.numberOfSection = 1000;
+
+        IntegralParam integralParam = new IntegralParam.Builder(MIN, MAX)
+                .integralMethod(IntegralMethods.RECTANGLE)
+                .numberOfThreads(10)
+                .numberOfSection(1000).build();
+
         OriginalFunction1 originalFunction1 = new OriginalFunction1();
         double exactValue = originalFunction1.value(MAX) - originalFunction1.value(MIN);
         System.out.println(" WARTOŚĆ DOKŁADNA (kalkulator całek online): 849.0290637385763");
@@ -33,7 +29,8 @@ public class Main {
         double result;
         for (IntegralMethods method : IntegralMethods.values()) {
 
-            integralParam.integralMethod = method;
+//            integralParam.integralMethod = method;
+            integralParam.setIntegralMethod(method);
 
             if(timeUnit.equals("ns")){
                 timeStart = System.nanoTime();

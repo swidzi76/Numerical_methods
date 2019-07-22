@@ -13,11 +13,16 @@ public class Integral {
     private static volatile double result = 0;
 
     public static double calculate(IntegralParam integralParam, Function function) throws InterruptedException {
-        a = integralParam.a;
-        b = integralParam.b;
-        numberOfThreads = integralParam.numberOfThreads;
-        numberOfSection = integralParam.numberOfSection;
-        switch (integralParam.integralMethod){
+//        a = integralParam.a;
+//        b = integralParam.b;
+        a = integralParam.getA();
+        b = integralParam.getB();
+//        numberOfThreads = integralParam.numberOfThreads;
+//        numberOfSection = integralParam.numberOfSection;
+        numberOfThreads = integralParam.getNumberOfThreads();
+        numberOfSection = integralParam.getNumberOfSection();
+//        switch (integralParam.integralMethod){
+        switch (integralParam.getIntegralMethod()){
             case RECTANGLE: return rectangleMethod(function);
             case RECTANGLE2: return rectangleMethod2(function);
             case RECTANGLE_WITH_THREADS: return rectangleMethodWithThreads(function);
