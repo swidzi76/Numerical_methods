@@ -26,7 +26,7 @@ public class Integral {
     };
     private static double rectangleMethodWithThreads(Function function) throws InterruptedException {
         if(numberOfThreads == 0) return 0;
-        result = 0;
+        //result = 0;
         ExecutorService threadPool = Executors.newFixedThreadPool(numberOfThreads);
         double dx = (b - a) / numberOfSection;
         for (int section = 0; section < numberOfSection; section++) {
